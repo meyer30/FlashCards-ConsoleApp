@@ -1,0 +1,72 @@
+Using Hyperspace Framework
+/*
+	3.28 
+
+~What does Workspace contain?@Location for activities to take place. Represented by tabs just under the User toolbar.
+~What does the Workspace Header contain?@Displays information relevant to the open workspace.
+~How should you define your reference to IEConnector?@Public Connector As IEConnector
+~{TRUE/FALSE} The home workspace opens when the user logins.@TRUE.
+~{TRUE/FALSE} The home workspace can be closed.@FALSE.
+~{TRUE/FALSE} All activities in Hyperspace share a single connection to the database.@TRUE.
+~Describe the Destroy event of the IEDControl interface.@The final method called before Hyperspace releases its reference to a control. Should be used to release all objects to avoid problems caused by circular references.
+~What is the INI for activities?@E2N, think nactivity like old english.
+~What is the INI for services?@E2S
+~What is the INI for workspaces?@E2O
+~{TRUE/FALSE} Sub Menu types can launch activities.@TRUE.  Think log out button.
+~What are service records used for?@Service records enable components that provide data management or business logic services to Hyperspace activities. Services may be enabled for all of Hyperspace or limited to specific workspaces.
+A good example of a service is the AccessManager which controls what items a user can view and/or use.
+~When does an activity use a InfoProviderArray?@When another activity passes it in.
+~What is IEConnector used for?@This is the interface for communication to the Caché server. Used for transactions, RPCs, and Bulk RPCs.
+~What is the INI for roles?@E2R
+~What is does implementing IEDControl mean?@The object is a user control and will handle such things as printing, accepting a variety of parameters during startup, shutting down gracefully when requested, etc.
+~What does Activity Tab List contain?@A list of available activities within the Workspace.
+~What are role records used for?@Defining what Menu and Toolbar buttons are available.
+
+~What do ARD and ERD objects represent?@Server and Client objects respectively.
+~What does Hyperspace Toolbar contain?@Set of quick-action buttons available to the user.  It's next to the Epic button.  Think print button.
+~What 2 interfaces do created controls usually implement?@IEDControl and IEDNeedDesktop
+~What is the INI for menus?@E2U, think ends in u
+~What's the difference between putting a filter on a menu vs activity?@A filter on an activity applies all the time.
+ A menu filter is specific to that point of access.
+~What does Activity contain?@A single task the user wishes to perform. Generally hosted within a related Workspace.
+~{TRUE/FALSE} Menu/Toolbar types can launch activities?@FALSE.  They only group other menu records.
+~What is IEControl used for?@Implemented by the user control, this interface gives the user control the ability to react to things that can happen at the Hyperspace-level, such as the closing of the workspace or the clicking of the Print button.
+~What does the Activity Toolbar contain?@A set of quick-access buttons specific to an activity.
+~What are some reasons why a user should not have access to an activity?@LACK OF SECURITY
+LACK OF APPLICATION LICENSING
+INAPPROPRIATE WORKSTATION
+INAPPROPRIATE TIME OF DAY
+
+~What is defined in menu records?@Navigation menus and toolbars, which can represent menus, submenus, menu items, toolbars, toolbar options, etc.
+~What is IEDWorkspace used for?@This reference represents the workspace you are operating w/i. Allows you to see workspace-related info as well as configure menus, headers, and other workspace-related properties.
+~{TRUE/FALSE} A Service can reference either a user control or a class module.@TRUE.
+~When does an activity use Published Information?@There's data published to the workspace and nothing passed in the InfoProvider.
+~How many user roles should a user have?@1.
+~How can an activity get a requested record?@InfoProviderArray > Published Information > Hyperspace Service
+~What is defined in activity records?@1. The ActiveX Control Hyperspace initiates 
+2.Needed parameters 
+3.Filter info about menu and toolbar options
+~What is IEDActivity used for?@This reference represents your current activity and contains activity-specific info such as the info requested during startup.
+~{TRUE/FALSE} Each user must have a User Role defined before he or she can log in to Hyperspace.@TRUE.
+~Describe the ActiveChanged event of the IEDControl interface.@Called directly after run during startup, but will also fire every time your activity gains or loses focus.
+~Define Security Classification.@A Security Classification is a setting applied to each user (usually on an application-by-application basis) that determines what options the user has access to within the system.
+*/
+~What does the In Basket Alert Bar contain?@Information on the current user, In Basket, tickler list, and time.
+~What is IEDNeedDesktop used for?@Implemented by a user control, it give the user control a reference to Hyperspace and connection to the database.
+~What does Hyperspace Title Bar contain?@Info on current Hyperspace settings, such as current environment, depart, user. It can also host the In Basket Alert Bar.
+~Describe the Initialize event of the IEDControl interface.@Called when your control is sited in Hyperspace. It will give you a reference to the activity you are hosted within, initialization parameters, and allow you to abort startup.
+~Define User role.@A User Role is a setting which determines the general layout of Hyperspace. This includes tasks that are automatically started when a user logs in as well as toolbar configuration. 
+Optimize menu configuration
+Limit the number of concurrent workspaces
+Change the action taken after a period of idle time
+~Define Info Name.@A string key that identifies a specific type of data that you need to look up.  These are listed on Activity and Service Records.
+~Describe the Run event of the IEDControl interface.@Called directly after initialize. Passes in additional parameters, and allows you to abort or fail startup and provide a fail reason to the user.
+~Describe the CanQuit event of the IEDControl interface.@Called when Hyperspace wants to close the activity. Under certain conditions, it allows cancelling of the shutdown process.
+~What is defined in a Service Record?@A list of Info Names that it can handle.
+A ProgId for the osx or dll.
+~What could be configured at the workspace level?@1.Workspace tab
+2.Workspace Header
+3.Activity tabs list
+4.Published objects
+~What is defined in workspace records?@The menu and toolbar records that are available.
+~What is IEpicDesktop used for?@A direct reference to Hyperspace as a whole. Allows you to request the shared connection to the server (see IEConnector), call modal forms, and request information provided by Hyperspace Services.

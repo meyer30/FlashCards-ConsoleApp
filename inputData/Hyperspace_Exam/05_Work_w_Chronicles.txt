@@ -1,0 +1,35 @@
+Working with Chronicles
+/*
+
+~Describe the purpose of Mailboxes?@Used for sending/recieving messages. Configured to listen to specific type of message.  Developer responsible for settting up.
+~{TRUE/FALSE} Hyperspace maintains its own post office.@TRUE. Its used for cross-workspace communication.
+~{TRUE/FALSE} Each workspace maintains its own post office.@TRUE. They are used for communcation between activities in the same workspace.
+~{TRUE/FALSE} Print button is disabled by default.@True
+~What messages will be recieved by a mailbox?@MessageIds w/i subscribe range
+Messages broadcast from a Hyperspace postoffice
+~Which IEDControl lifetime event is best for enabling printing?@ActiveChanged.
+~How do you assign a MailBox?@Set m_Mailbox = m_Desktop.PostOffice.CreateMailBox or 
+Set m_Mailbox = m_Workspace.PostOffice.CreateMailBox
+~What are message parameters and their types?@MessageId of type Long. Up to 3 attachments of type variant.
+~How do you declare a MailBox?@Private WithEvents m_MailBox As EDMailBox
+~Describe the purpose of PostOffices@Responsible for creating mailboxes and sorting messages.  They are available when the activity starts.
+~What must a MailBox do to listen for specific messages?@The mailbox must subscribe for a messageID // Call m_Mailbox.Subscribe(msgId)
+or to range of IDs. ex. Call m_Mailbox.SubscribeRange(-1,-1)
+~How can the Workspace Header be updated dynamically?@m_Workspace.Header = "some html string"
+~What should be done to a mailbox in the IEDControl_Destory event?@Call m_Mailbox.Unsubscribe
+Set m_Mailbox = Nothing
+~Where should a mailbox be called to subscribe to a message ID?@In the IEDControl_Run Event.
+*/
+~What must be set in the workspace record in order for the header to be visible?@The Style must contain the 1 bit.
+~How can the text on a Workspace Tab be updated dynamically?@m_Workspace.Name = "Text here"
+~How do you define and assign the AccessManager?@Dim AccessManager As IEDSAccessManager 
+Set AccessManager = m_Desktop.Services("AccessManager")
+~What event fires when a mailbox gets a letter?@Private Sub m_Mailbox_MessageReceived(msgId As Long, Attch1 As Variant, Attch2 As Variant, Attch3 As Variant, ByVal WasBroadcast As Boolean) 
+End Sub
+~What does AccessManager.UserSecurityPoint do?@Retrieves the user security point for security area and application. Provide the security point (usually the abbreviation associated with security point category list entry), Security area, and Application ID
+~How do you add a printbutton and enable it?@Call m_Activity.PrintMenu.AddItem("MENU_ITM","Menu Item")
+m_Activity.PrintMenu.Enabled = True
+~What does AccessManager provide?@Information on lincenses, users, and secutiry and time of day restrictions.
+~How do you send a letter?@Call m_Mailbox.SendMessage(msgId,attach1,attach2,attach3) or
+Call m_Desktop.PostOffice.SendMessage(msgId,attach1,attach2,attach3)
+~How do you know which print menu item was clicked?@The Descriptor parameter = the descriptor of the print menu item.
