@@ -1,5 +1,5 @@
 # FlashCards-ConsoleApp
-This was a console app i built for studying.
+This was a C# console app i built for memorizing.
 
 To use the application.  Open it w/ Visual Studio and hit start.
 
